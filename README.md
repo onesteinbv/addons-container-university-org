@@ -1,2 +1,2 @@
-# addons-customer-open-source-university
-Open Source University
+# addons-container-university-org
+Open Source Science
