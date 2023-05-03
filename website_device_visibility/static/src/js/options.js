@@ -14,16 +14,36 @@ options.registry.DeviceVisibility = options.Class.extend({
      */
     toggleDeviceVisibility(previewMode, widgetValue, params) {
         this.$target[0].classList.remove('d-none', 'd-md-none', 'd-lg-none',
+            'o_snippet_mobile_invisible', 'o_snippet_desktop_invisible',
+            'o_snippet_override_invisible','o_snippet_invisible'
         );
         const style = getComputedStyle(this.$target[0]);
         this.$target[0].classList.remove(`d-md-${style['display']}`, `d-lg-${style['display']}`);
         if (widgetValue === 'no_desktop') {
-            this.$target[0].classList.add('d-lg-none');
+            this.$target[0].classList.add('d-lg-none', 'o_snippet_desktop_invisible','o_snippet_invisible');
         } else if (widgetValue === 'no_mobile') {
-            this.$target[0].classList.add(`d-lg-${style['display']}`, 'd-none');
+            this.$target[0].classList.add(`d-lg-${style['display']}`, 'd-none', 'o_snippet_mobile_invisible','o_snippet_invisible');
         }
+        this.trigger_up('snippet_option_visibility_update', {show: false});
     },
-
+        /**
+     * @override
+     */
+    async onTargetHide() {
+        this.$target[0].classList.remove('o_snippet_override_invisible');
+    },
+    /**
+     * @override
+     */
+    async onTargetShow() {
+        this.$target[0].classList.add('o_snippet_override_invisible');
+    },
+    /**
+     * @override
+     */
+    cleanForSave() {
+        this.$target[0].classList.remove('o_snippet_override_invisible');
+    },
     //--------------------------------------------------------------------------
     // Private
     //--------------------------------------------------------------------------
