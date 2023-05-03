@@ -36,7 +36,10 @@ options.registry.DeviceVisibility = options.Class.extend({
      * @override
      */
     async onTargetShow() {
-        this.$target[0].classList.add('o_snippet_override_invisible');
+        if (this.$target[0].classList.contains('o_snippet_mobile_invisible')
+                || this.$target[0].classList.contains('o_snippet_desktop_invisible')) {
+            this.$target[0].classList.add('o_snippet_override_invisible');
+        }
     },
     /**
      * @override
