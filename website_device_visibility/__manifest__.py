@@ -14,6 +14,7 @@
     "assets": {
         'website.assets_wysiwyg': [
             'website_device_visibility/static/src/js/options.js',
+            'website_device_visibility/static/src/js/editor.js',
             'website_device_visibility/static/src/scss/website_device_visibility.scss',
         ],
         'website.website_configurator_assets_scss': [
