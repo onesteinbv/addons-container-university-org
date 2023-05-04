@@ -2,6 +2,8 @@ odoo.define('website_device_visibility.snippets.options', function (require) {
 'use strict';
 
 const options = require('web_editor.snippets.options');
+require('website.editor.snippets.options');
+
 /**
  * Manage the visibility of snippets on mobile & desktop.
  */
@@ -68,4 +70,15 @@ options.registry.DeviceVisibility = options.Class.extend({
         return await this._super(...arguments);
     },
 });
+
+options.registry.ConditionalVisibility.include({
+    /**
+     * @override
+     */
+    async onTargetHide() {
+        if (this.$target[0].classList.contains('o_snippet_invisible')) {
+            this.$target[0].classList.add('o_conditional_hidden');
+        }
+    },
+})
 });
